@@ -12,12 +12,11 @@ class ParticipateInForumTest extends TestCase
     /** @test */
     public function an_authenticated_user_can_reply_to_a_thread()
     {
-        //login
-        $this->be($user = factory('App\User')->create());
+        $this->signIn();
 
-        $thread = factory('App\Thread')->create();
+        $thread = create('App\Thread');
 
-        $reply = factory('App\Reply')->create(['thread_id' => $thread->id]);
+        $reply = create('App\Reply', ['thread_id' => $thread->id]);
 
         //post to route
         $this->post($thread->path().'/replies', $reply->toArray());
@@ -32,8 +31,8 @@ class ParticipateInForumTest extends TestCase
         $this->expectException('Illuminate\Auth\AuthenticationException');
 
         //post to route
-        $this->post('threads/1/replies', []);
-
+        $this->withoutExceptionHandling()
+        ->post('threads/1/replies', []);
     }
 
 

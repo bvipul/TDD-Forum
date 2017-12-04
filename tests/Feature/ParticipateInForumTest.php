@@ -28,12 +28,12 @@ class ParticipateInForumTest extends TestCase
     /** @test */
     public function an_unauthenticated_user_cannot_reply_to_a_thread()
     {
+        $thread = create('App\Thread');
         $this->expectException('Illuminate\Auth\AuthenticationException');
 
         //post to route
         $this->withoutExceptionHandling()
-        ->post('threads/1/replies', []);
+            ->post($thread->path() . '/replies', $thread->toArray())
+            ->assertRedirect(route('login'));
     }
-
-
 }

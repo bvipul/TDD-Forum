@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
+        @if($threads->count() > 0)
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -29,6 +30,11 @@
 
             </div>            
         </div>
+        @else
+        <p class="text-center">No Forum Threads are active. Add 
+            <a href="{{ route('threads.create') }}">Thread</a>
+        </p>
+        @endif
     </div>
 </div>
 @endsection

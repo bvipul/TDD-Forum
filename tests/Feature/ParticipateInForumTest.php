@@ -32,8 +32,19 @@ class ParticipateInForumTest extends TestCase
         $this->expectException('Illuminate\Auth\AuthenticationException');
 
         //post to route
-        $this->withoutExceptionHandling()
-            ->post($thread->path() . '/replies', $thread->toArray())
+        $this->post($thread->path() . '/replies', [])
             ->assertRedirect(route('login'));
+    }
+
+    /** @test */
+    public function a_reply_requires_a_body()
+    {
+        $this->withExceptionHandling()->signIn();
+
+        $thread = create('App\Thread');
+        $reply = make('App\Reply', ['body' => null]);
+        
+        $this->post($thread->path() . '/replies', $reply->toArray())
+            ->assertSessionHasErrors('body');
     }
 }

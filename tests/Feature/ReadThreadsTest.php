@@ -39,4 +39,18 @@ class ThreadsTest extends TestCase
         $this->get($this->thread->path())
             ->assertSee($reply->body);
     }
+
+    /** @test */
+    public function a_user_can_view_threads_associated_with_a_channel()
+    {
+        $channel = create('App\Channel');
+
+        $threadInChannel = create('App\Thread', ['channel_id' => $channel->id]);
+
+        $threadoNotInChannel = create('App\Thread');
+
+        $this->get('/threads/' . $channel->slug)
+            ->assertSee($threadInChannel->title)
+            ->assertDontSee($threadoNotInChannel->title);
+    }
 }

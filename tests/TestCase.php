@@ -16,4 +16,11 @@ abstract class TestCase extends BaseTestCase
 
         return $this;
     }
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->withoutExceptionHandling();
+    }
 }

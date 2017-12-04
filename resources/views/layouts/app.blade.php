@@ -37,6 +37,20 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         <li><a href="{{ route('threads.index') }}">Threads</a></li>
+                        <li role="presentation" class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            Channels <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                @foreach($channels as $channel)
+                                    <li>
+                                        <a href="{{ $channel->path() }}">
+                                            {{ $channel->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

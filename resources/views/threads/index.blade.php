@@ -17,7 +17,7 @@
                             <div class="panel-heading">
                                 <a href="{{ $thread->path() }}">{{ $thread->title }}</a>
                                 &nbsp;by&nbsp;
-                                <a href="#">{{ $thread->creator->name }}</a>
+                                <a href="{{ route('threads.index', ['by' => $thread->creator->name])  }}">{{ $thread->creator->name }}</a>
                             </div>
                 
                             <div class="panel-body">

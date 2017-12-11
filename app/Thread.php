@@ -9,6 +9,15 @@ class Thread extends Model
 
     protected $guarded = ['id'];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(function($builder){
+            $builder->withCount('replies');
+        });
+    }
+
     public function path() 
     {
         return '/threads/' . $this->channel->slug . '/' . $this->id;

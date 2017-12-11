@@ -15,9 +15,17 @@
                 
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <a href="{{ $thread->path() }}">{{ $thread->title }}</a>
-                                &nbsp;by&nbsp;
-                                <a href="{{ route('threads.index', ['by' => $thread->creator->name])  }}">{{ $thread->creator->name }}</a>
+                                <div class="level">
+                                    <h4 class="flex">
+                                        <a href="{{ $thread->path() }}">{{ $thread->title }}</a>
+                                    </h4>
+
+                                    <strong>
+                                        <a href="{{ $thread->path() }}">
+                                            {{ $thread->replies_count . ' ' . str_plural('reply', $thread->replies_count) }}
+                                        </a>
+                                    </strong>
+                                </div>
                             </div>
                 
                             <div class="panel-body">

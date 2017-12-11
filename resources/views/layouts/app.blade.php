@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body style="padding-bottom:100px">
+<body>
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -42,9 +42,18 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ route('threads.index') }}">All Threads</a></li>
+                                
                                 @if($user = auth()->user())
                                     <li><a href="{{ route('threads.index', ['by'=> $user->name]) }}">My Threads</a></li>
                                 @endif
+
+                                <li>
+                                    <a href="{{ route('threads.index', ['popular' => 1]) }}">Popular Threads</a>
+                                </li>
+
+                                <li>
+                                    <a href="{{ route('threads.index', ['popular' => 1, 'by'=> $user->name]) }}">My Popular Threads</a>
+                                </li>
                             </ul>
                         </li>
                         <li><a href="{{ route('threads.create') }}">New Thread</a></li>

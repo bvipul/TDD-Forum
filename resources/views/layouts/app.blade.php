@@ -45,14 +45,11 @@
                                 
                                 @if($user = auth()->user())
                                     <li><a href="{{ route('threads.index', ['by'=> $user->name]) }}">My Threads</a></li>
+                                    <li><a href="{{ route('threads.index', ['popular' => 1, 'by'=> $user->name]) }}">My Popular Threads</a></li>
                                 @endif
 
                                 <li>
                                     <a href="{{ route('threads.index', ['popular' => 1]) }}">Popular Threads</a>
-                                </li>
-
-                                <li>
-                                    <a href="{{ route('threads.index', ['popular' => 1, 'by'=> $user->name]) }}">My Popular Threads</a>
                                 </li>
                             </ul>
                         </li>

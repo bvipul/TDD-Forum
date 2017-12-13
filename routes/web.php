@@ -20,8 +20,8 @@ Route::post('/threads', 'ThreadsController@store')->name('threads.store');
 Route::get('/threads/create', 'ThreadsController@create')->name('threads.create');
 Route::get('/threads/{channel}/{thread}', 'ThreadsController@show')->name('threads.show');
 Route::get('/threads/{channel}', 'ThreadsController@index');
-
 Route::post('/threads/{channel}/{thread}/replies', 'RepliesController@store');
+Route::post('/replies/{reply}/favorite', 'FavoritesController@store')->name('reply.favorite');
 
 Auth::routes();
 

@@ -19,8 +19,21 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         View::composer('*', function ($view) {
-            $view->with('channels',  Channel::all());
+            $channels = \Cache::rememberForever('channels', function(){
+                return Channel::all();                
+            });
+            $view->with('channels',  $channels);
         });
+
+        // View::composer('*', function ($view) {
+        //     $user = \Cache::rememberForever('logged_in_user', function(){
+        //         if(auth()->check()) {
+        //             return auth()->user()->id;                
+        //         }
+        //         // return 
+        //     });
+        //     $view->with('logged_in_user',  $user);
+        // });
     }
 
     /**

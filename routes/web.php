@@ -23,6 +23,8 @@ Route::get('/threads/{channel}', 'ThreadsController@index');
 Route::post('/threads/{channel}/{thread}/replies', 'RepliesController@store');
 Route::post('/replies/{reply}/favorite', 'FavoritesController@store')->name('reply.favorite');
 
+Route::get('/profile/{user}', 'ProfilesController@show')->name('profile');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -15,10 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/threads', 'ThreadsController@index')->name('threads.index');
-Route::post('/threads', 'ThreadsController@store')->name('threads.store');
-Route::get('/threads/create', 'ThreadsController@create')->name('threads.create');
+Route::resource('threads', 'ThreadsController')->except(['show', 'edit', 'update','destroy']);
 Route::get('/threads/{channel}/{thread}', 'ThreadsController@show')->name('threads.show');
+Route::delete('/threads/{channel}/{thread}', 'ThreadsController@destroy')->name('threads.destroy');
 Route::get('/threads/{channel}', 'ThreadsController@index');
 Route::post('/threads/{channel}/{thread}/replies', 'RepliesController@store');
 Route::post('/replies/{reply}/favorite', 'FavoritesController@store')->name('reply.favorite');

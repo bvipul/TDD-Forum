@@ -24,16 +24,6 @@ class AppServiceProvider extends ServiceProvider
             });
             $view->with('channels',  $channels);
         });
-
-        // View::composer('*', function ($view) {
-        //     $user = \Cache::rememberForever('logged_in_user', function(){
-        //         if(auth()->check()) {
-        //             return auth()->user()->id;                
-        //         }
-        //         // return 
-        //     });
-        //     $view->with('logged_in_user',  $user);
-        // });
     }
 
     /**

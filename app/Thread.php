@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Activity;
+use App\Traits\RecordsActivity;
 use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
+    use RecordsActivity;
 
     protected $guarded = ['id'];
 
@@ -19,7 +22,7 @@ class Thread extends Model
             $builder->withCount('replies');
         });
 
-        static::deleted(function($thread) {
+        static::deleting(function($thread) {
             $thread->replies()->delete();
         });
     }

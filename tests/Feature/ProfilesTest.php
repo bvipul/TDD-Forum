@@ -12,13 +12,13 @@ class ProfilesTest extends TestCase
     /** @test */
     public function a_user_has_a_profile()
     {
-        $user = create('App\User');
+        $this->signIn();
 
-        $threadOne = create('App\Thread', ['user_id' => $user->id]);
-        $threadTwo = create('App\Thread', ['user_id' => $user->id]);
+        $threadOne = create('App\Thread', ['user_id' => auth()->id()]);
+        $threadTwo = create('App\Thread', ['user_id' => auth()->id()]);
 
-        $this->get(route('profile', $user->name))
-            ->assertSee($user->name)
+        $this->get(route('profile', auth()->user()->name))
+            ->assertSee(auth()->user()->name)
             ->assertSee($threadOne->title)
             ->assertSee($threadOne->body)
             ->assertSee($threadTwo->title)

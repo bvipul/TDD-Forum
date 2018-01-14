@@ -7,7 +7,14 @@
 
 require('./bootstrap');
 
+
 window.Vue = require('vue');
+
+window.events = new Vue();
+
+window.flash = function (message) {
+    window.events.$emit('flash', message);
+};
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -15,7 +22,7 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('flash', require('./components/Flash.vue'));
 
 const app = new Vue({
     el: '#app'

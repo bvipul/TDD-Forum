@@ -8,6 +8,6 @@
 	</div>
 
 	<div class="panel-body">
-        {{ $body }}
+		{{ $body }}
 	</div>
 </div>

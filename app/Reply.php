@@ -13,7 +13,7 @@ class Reply extends Model
     
     protected $fillable = ['body', 'user_id'];
 
-    protected $with = ['favorites', 'owner'];
+    protected $with = ['thread', 'owner'];
     
     public function owner()
     {
@@ -23,5 +23,9 @@ class Reply extends Model
     public function thread()
     {
         return $this->belongsTo(Thread::class);
+    }
+
+    public function path() {
+        return $this->thread->path();
     }
 }

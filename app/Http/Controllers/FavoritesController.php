@@ -16,6 +16,10 @@ class FavoritesController extends Controller
     public function store(Request $request, Reply $reply)
     {
         $reply->favorite();
+
+        if($request->expectsJson()) {
+            return response(['status' => 'Reply Favorited', 'count' => $reply->favorites_count]);
+        }
         
         return back();
     }

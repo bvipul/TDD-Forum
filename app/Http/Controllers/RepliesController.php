@@ -94,7 +94,11 @@ class RepliesController extends Controller
             'body' => $request->body
         ));
 
-        return response($reply, 200);
+        if(request()->expectsJson()) {
+            return response(['status' => 'Reply Updated.', 'reply' => $reply]);
+        }
+
+        return back();
     }
 
     /**
@@ -108,6 +112,10 @@ class RepliesController extends Controller
         $this->authorize('update', $reply);
 
         $reply->delete();
+
+        if(request()->expectsJson()) {
+            return response(['status' => 'Reply Deleted.']);
+        }
 
         return back();
     }

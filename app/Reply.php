@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\User;
 use App\Thread;
 use App\Traits\Favoritable;
 use App\Traits\RecordsActivity;
@@ -14,10 +15,12 @@ class Reply extends Model
     protected $fillable = ['body', 'user_id'];
 
     protected $with = ['thread', 'owner'];
+
+    protected $appends = ['favoritesCount'];
     
     public function owner()
     {
-        return $this->belongsTo(\App\User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function thread()

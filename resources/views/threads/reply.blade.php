@@ -8,13 +8,7 @@
                     </a>
                     said {{ $reply->created_at->diffForHumans() }}
                 </h5>
-
-                <form method="POST" action="{{ route('reply.favorite', $reply->id) }}" >
-                    {{ csrf_field() }}
-                    <button type="submit" class="btn btn-default" {{($reply->isFavorited()) ? 'disabled' : ''}}>
-                        {{ $reply->favorites_count . ' ' . str_plural('Favorite', $reply->favorites_count) }} 
-                    </button>
-                </form>
+                <favorite :reply="{{ $reply }}"></favorite>
             </div>
         </div>
 
@@ -31,12 +25,7 @@
             <div class="panel-footer">
                 <div v-if="!editing" class="level">
                     <button class="btn btn-xs mr-1" @click="editing = true">Edit</button>
-                    <form method="POST" action="/replies/{{ $reply->id }}">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-
-                        <button class="btn btn-xs btn-danger">Delete</button>
-                    </form>
+                    <button class="btn btn-xs btn-danger" @click="destroy">Delete</button>
                 </div>
                 <div class="level" v-else>
                     <button class="btn btn-xs btn-primary mr-1" @click="update">Update</button>
